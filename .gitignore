@@ -1,0 +1,80 @@
+
+
+# ----------------------------
+# Terraform
+# ----------------------------
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Terraform plan files (optional)
+*.tfplan
+
+# Local Terraform CLI settings
+.terraformrc
+terraform.rc
+
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.pys
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+ENV/
+env/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter (if used)
+.ipynb_checkpoints/
+
+# ----------------------------
+# AWS / Secrets / Keys (IMPORTANT)
+# ----------------------------
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.jks
+*.kdb
+
+# AWS credentials / config (don’t commit)
+.aws/
+**/.aws/
+
+# Common secret files
+.env
+.env.*
+secrets.*
+*secret*
+*password*
+
+# ----------------------------
+# OS / Editor
+# ----------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
