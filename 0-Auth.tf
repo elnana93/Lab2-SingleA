@@ -11,7 +11,3 @@ terraform {
     }
   }
 }
-
-# git commit -m "Updated Variables"
-
-# curl -I http://ec2-16-147-224-181.us-west-2.compute.amazonaws.com

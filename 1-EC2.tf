@@ -11,6 +11,10 @@ data "aws_ami" "al2023" {
   }
 }
 
+locals {
+  startup_b64 = base64encode(file("${path.module}/startup.sh"))
+}
+
 resource "aws_instance" "lab_ec2_app" {
   ami                  = data.aws_ami.al2023.id
   instance_type        = var.instance_type
@@ -28,33 +32,19 @@ resource "aws_instance" "lab_ec2_app" {
     var.extra_tags
   )
 
- user_data = <<EOF
-#!/bin/bash
-set -euxo pipefail
+ # inside your aws_instance resource:
+user_data = <<-EOF
+    #!/bin/bash
+    set -euxo pipefail
 
-dnf -y update || true
-dnf -y install nginx
+    echo '${local.startup_b64}' | base64 -d > /usr/local/bin/startup.sh
+    chmod +x /usr/local/bin/startup.sh
 
-systemctl enable --now nginx
-
-cat > /usr/share/nginx/html/index.html <<'HTML'
-<!doctype html>
-<html>
-  <head><meta charset="utf-8"><title>Hello</title></head>
-  <body style="font-family: Arial, sans-serif;">
-    <h1>Hello World!</h1>
-    <p>Served from EC2 via Nginx.</p>
-  </body>
-</html>
-HTML
-
-chmod -R a+rX /usr/share/nginx/html
-systemctl restart nginx
-echo "setup completed"
-EOF
-
+    /usr/local/bin/startup.sh > /var/log/startup.log 2>&1
+  EOF
 
 }
+
 
 
 # IAM Role (EC2 can assume it)
@@ -96,5 +86,3 @@ output "lab_ec2_public_url" {
   value = "http://${coalesce(aws_instance.lab_ec2_app.public_dns, aws_instance.lab_ec2_app.public_ip)}"
 }
 
-
-# git commit -m "first commit"
