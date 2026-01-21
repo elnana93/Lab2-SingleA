@@ -84,4 +84,9 @@ output "lab_ec2_public_url" {
   value = "http://${coalesce(aws_instance.lab_ec2_app.public_dns, aws_instance.lab_ec2_app.public_ip)}"
 }
 
-# create an output for ssh command later
+
+output "lab_ec2_ssh_command" {
+  description = "SSH command to connect to the EC2 instance (Amazon Linux 2023)."
+  value       = "ssh -i ${path.module}/${var.key_name}.pem ec2-user@${coalesce(aws_instance.lab_ec2_app.public_dns, aws_instance.lab_ec2_app.public_ip)}"
+}
+
