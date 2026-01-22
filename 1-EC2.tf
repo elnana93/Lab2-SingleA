@@ -32,7 +32,6 @@ resource "aws_instance" "lab_ec2_app" {
     var.extra_tags
   )
 
- # inside your aws_instance resource:
 user_data = <<-EOF
     #!/bin/bash
     set -euxo pipefail

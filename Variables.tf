@@ -66,5 +66,5 @@ variable "vpc_id" {
 variable "ssh_cidr_blocks" {
   description = "CIDR blocks allowed to SSH (port 22). Use your public IP /32."
   type        = list(string)
-  default     = ["185.193.157.189/32"] # CHANGE to ["your.ip.address/32"] for safety
+  default     = ["185.193.157.189/32"] # Where your at at the moment! / CHANGE to ["your.ip.address/32"] for safety
 }

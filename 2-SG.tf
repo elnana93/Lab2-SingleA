@@ -47,7 +47,3 @@ resource "aws_security_group" "lab_web_sg" {
 }
 
 
-# nc -vz 54.202.118.152 80
-# nc -vz 54.202.118.152 22
-
-# curl -I http://54.202.118.152
